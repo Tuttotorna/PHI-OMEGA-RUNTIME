@@ -88,9 +88,14 @@ The parent repository preserves full formula history, guard library, provenance,
 
 This runtime preserves the operational functions needed for first contact without exposing the full historical guard corpus before use.
 
+## v0.1.1 Context-Indexed Object Guard
+A named object is not yet an operational object. The runtime now rejects raw material outside the input contract, rejects non-string required fields, handles malformed external evidence without crashing, and requires repair when fields are present but operationally empty, totalizing, or context-unfixed.
+
+See: docs/CONTEXT_INDEXED_OBJECT_GUARD.md
+
 ## Status
 
-Version: v0.1.0
+Version: v0.1.1
 
 Release type: initial runtime extraction
 
