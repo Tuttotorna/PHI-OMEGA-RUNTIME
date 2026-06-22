@@ -1,0 +1,10 @@
+{
+  "object": "AI answer about a current public event",
+  "mode": "answer generation with external traces",
+  "use": "test whether the answer is valid inside the accessible evidence field",
+  "accessible_field": "current external sources available to the operator",
+  "observed_issue": "The answer may present a conclusion without declaring source limits.",
+  "dependency": "source freshness, source reliability, trace classification, unresolved counter-traces",
+  "removal_failure": "If source freshness and counter-traces are missing, the answer becomes falsely sufficient.",
+  "proposed_realignment": "Declare trace need, classify sources, state field limit, and output only an A-bound answer."
+}

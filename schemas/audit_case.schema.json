@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI-OMEGA Runtime Audit Case",
+  "type": "object",
+  "required": [
+    "object",
+    "mode",
+    "use",
+    "accessible_field",
+    "observed_issue",
+    "dependency",
+    "removal_failure",
+    "proposed_realignment"
+  ],
+  "properties": {
+    "object": {"type": "string"},
+    "mode": {"type": "string"},
+    "use": {"type": "string"},
+    "accessible_field": {"type": "string"},
+    "observed_issue": {"type": "string"},
+    "dependency": {"type": "string"},
+    "removal_failure": {"type": "string"},
+    "proposed_realignment": {"type": "string"},
+    "external_evidence": {
+      "type": "object",
+      "properties": {
+        "source_repo": {"type": "string"},
+        "field_limit": {"type": "string"},
+        "stable_features": {"type": "array"},
+        "fragile_features": {"type": "array"},
+        "ruptures": {"type": "array"}
+      }
+    }
+  },
+  "additionalProperties": true
+}

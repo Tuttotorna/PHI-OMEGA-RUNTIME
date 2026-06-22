@@ -1,0 +1,26 @@
+name: PHI-OMEGA-RUNTIME CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies
+        run: python -m pip install -q pytest
+      - name: Compile runtime
+        run: python -m py_compile run_phi_omega.py
+      - name: Run runtime smoke
+        run: python run_phi_omega.py examples/minimal_case.json --json
+      - name: Run tests
+        run: python -m pytest -q

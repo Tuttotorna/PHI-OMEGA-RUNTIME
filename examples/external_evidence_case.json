@@ -1,0 +1,17 @@
+{
+  "object": "multi-base observation result",
+  "mode": "external structural evidence admission",
+  "use": "test whether external sensor evidence can enter PHI-OMEGA audit",
+  "accessible_field": "bounded external packet from supported evidence producer",
+  "observed_issue": "An external repo reports stable and fragile features, but the evidence must not become total proof.",
+  "dependency": "source repo status, object/mode/use alignment, field limit, stable and fragile feature declaration",
+  "removal_failure": "If source status and field limit are absent, the evidence becomes unaudited or totalized.",
+  "proposed_realignment": "Admit the packet only as bounded evidence and keep PHI-OMEGA as audit criterion.",
+  "external_evidence": {
+    "source_repo": "OMNIABASE",
+    "field_limit": "bases 2..160, bounded observation, not totality",
+    "stable_features": ["feature_A"],
+    "fragile_features": ["feature_B"],
+    "ruptures": []
+  }
+}

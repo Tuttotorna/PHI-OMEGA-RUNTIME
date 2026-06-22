@@ -1,0 +1,10 @@
+{
+  "object": "public strategic reset claim",
+  "mode": "corporate decision communication",
+  "use": "test whether the stated reset is sufficient for operational trust",
+  "accessible_field": "public claim, market context, customer trust, dealer network, execution dependencies",
+  "observed_issue": "The claim presents reset language without showing whether core trust and execution dependencies are restored.",
+  "dependency": "customer trust, dealer network confidence, pricing coherence, product reliability, software reliability",
+  "removal_failure": "If these dependencies are absent, the reset remains communicative rather than operational.",
+  "proposed_realignment": "Convert the reset claim into dependency-indexed commitments with measurable trust, dealer, price, reliability, and delivery indicators."
+}
