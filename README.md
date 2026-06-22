@@ -95,8 +95,23 @@ See: docs/CONTEXT_INDEXED_OBJECT_GUARD.md
 
 ## Status
 
-Version: v0.1.1
+Version: v0.1.2
 
 Release type: initial runtime extraction
 
 Rights: all rights reserved
+
+
+## v0.1.2 Strict Bare Limit Object Guard
+
+Weak context is not operational context.
+
+Bare limit objects such as `nothing`, `time`, `identity`, `outside Ω`, `infinity`, `everything`, `totality`, and `origin of totality` now require repair unless the declared object itself is explicitly context-fixed.
+
+Example rejected:
+`object = "time"` with contextual words elsewhere in the case.
+
+Example admitted:
+`object = "project approval deadline"` or `object = "the term 'time' as a semantic concept"`.
+
+See: docs/STRICT_BARE_LIMIT_OBJECT_GUARD.md

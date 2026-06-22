@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
-VERSION = "v0.1.1"
+VERSION = "v0.1.2"
 
 PARENT_REPO = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA"
 PARENT_RELEASE = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA/releases/tag/v0.1.65"
@@ -189,7 +189,7 @@ def compact_text(*values: Any) -> str:
 
 def normalize_text(value: Any) -> str:
     text = str(value or "").strip().lower()
-    text = text.replace("ω", "omega")
+    text = text.replace("Ω", "omega").replace("ω", "omega")
     text = re.sub(r"[^a-z0-9_\-\s]+", " ", text)
     text = re.sub(r"\s+", " ", text).strip()
     return text
@@ -281,6 +281,65 @@ def operational_substance_audit(case: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
+
+
+STRICT_LIMIT_OBJECT_CONTEXT_PATTERNS = [
+    r"\bword\b",
+    r"\bterm\b",
+    r"\bconcept\b",
+    r"\blinguistic\b",
+    r"\bsemantic\b",
+    r"\bsymbol\b",
+    r"\bpunctuation\b",
+    r"\babbreviation\b",
+    r"\bdecimal point\b",
+    r"\bdeadline\b",
+    r"\btimeline\b",
+    r"\btime window\b",
+    r"\bclock\b",
+    r"\btemporal field\b",
+    r"\bT_Φ\b",
+    r"\bre-identification\b",
+    r"\breidentification\b",
+    r"\bversion\b",
+    r"\brecord\b",
+    r"\bcontinuity trace\b",
+    r"\bidentity_\b",
+    r"\blocal fragment\b",
+    r"\bfragment-origin\b",
+    r"\bfragment origin\b",
+    r"\bformal infinity\b",
+    r"\bmathematical infinity\b",
+    r"\blocal infinity\b",
+    r"\bbounded field\b",
+    r"\baccessible field\b",
+    r"\bΩ_A\b",
+    r"\bomega_a\b",
+    r"\bboundary concept\b",
+    r"\bboundary form\b",
+    r"\bdeclared absence\b",
+]
+
+
+def has_strong_context_in_declared_object(object_text: Any) -> bool:
+    text = str(object_text or "").strip()
+    normalized = normalize_text(text)
+    joined = f"{text.lower()} {normalized}"
+    return any(re.search(pattern, joined, flags=re.IGNORECASE) for pattern in STRICT_LIMIT_OBJECT_CONTEXT_PATTERNS)
+
+
+def limit_object_match(obj_norm: str, term_norm: str) -> bool:
+    if not obj_norm or not term_norm:
+        return False
+    padded_obj = f" {obj_norm} "
+    padded_term = f" {term_norm} "
+    return (
+        obj_norm == term_norm
+        or obj_norm.startswith(term_norm + " ")
+        or obj_norm.endswith(" " + term_norm)
+        or padded_term in padded_obj
+    )
+
 def context_indexed_object_audit(case: Dict[str, Any]) -> Dict[str, Any]:
     errors: List[str] = []
     warnings: List[str] = []
@@ -294,7 +353,7 @@ def context_indexed_object_audit(case: Dict[str, Any]) -> Dict[str, Any]:
     if not obj:
         return {"errors": ["Err_DECLARED_OBJECT_EMPTY"], "warnings": [], "route": None}
 
-    if len(obj) <= 2 and not has_context_fix(mode_use_field):
+    if len(obj) <= 2 and not has_strong_context_in_declared_object(obj_raw):
         errors.append("Err_DECLARED_OBJECT_REQUIRES_CONTEXT")
         route = {
             "declared_object": obj_raw,
@@ -303,16 +362,27 @@ def context_indexed_object_audit(case: Dict[str, Any]) -> Dict[str, Any]:
             "reason": "A bare sign or very short token is not audit-ready outside context.",
         }
 
-    for term, guard, route_to in LIMIT_OBJECT_ROUTES:
+    # Strict v0.1.2 rule:
+    # For limit objects, weak context found elsewhere in mode/use/field is not enough.
+    # The declared object itself must be context-fixed, e.g. "the word 'time' as a linguistic concept",
+    # "project approval deadline", "identity record version", "formal infinity symbol", etc.
+    for term, guard, route_to in sorted(LIMIT_OBJECT_ROUTES, key=lambda item: len(normalize_text(item[0])), reverse=True):
         term_norm = normalize_text(term)
-        if obj == term_norm or obj.startswith(term_norm + " ") or (" " + term_norm + " ") in (" " + obj + " "):
-            if not has_context_fix(full_context):
+        if limit_object_match(obj, term_norm):
+            if not has_strong_context_in_declared_object(obj_raw):
                 errors.append("Err_DECLARED_OBJECT_NOT_AUDITABLE_AS_DECLARED")
+                if has_context_fix(full_context):
+                    errors.append("Err_WEAK_CONTEXT_AS_CONTEXT_FIX")
                 route = {
                     "declared_object": obj_raw,
                     "guard": guard,
                     "route_to": route_to,
-                    "reason": "The declared name is a limit-form or context-dependent object; it must be fixed by mode, use, accessible field, traces, and limits before audit.",
+                    "reason": (
+                        "The declared name is a bare limit-form or context-dependent object. "
+                        "Weak context elsewhere in the case is not enough. "
+                        "The object itself must be explicitly fixed as word, concept, deadline, record, version, "
+                        "symbol, local fragment, bounded field, or other operational form before audit."
+                    ),
                 }
             break
 
