@@ -1,6 +1,6 @@
 # Provenance
 
-PHI-OMEGA-RUNTIME v0.1.1 is an extracted compact runtime.
+PHI-OMEGA-RUNTIME v0.1.2 is an extracted compact runtime.
 
 Parent source of truth:
 
@@ -51,4 +51,7 @@ Runtime correction:
 Those remain in the parent repository.
 
 
-v0.1.1 Context-Indexed Object Guard generated on 2026-06-22T13:50:25.402400+00:00.
+v0.1.2 Context-Indexed Object Guard generated on 2026-06-22T13:50:25.402400+00:00.
+
+
+v0.1.2 Strict Bare Limit Object Guard generated on 2026-06-22T14:09:52.373442+00:00.
