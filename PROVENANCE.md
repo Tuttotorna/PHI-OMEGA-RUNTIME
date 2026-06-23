@@ -75,3 +75,23 @@ Purpose:
 Parent mother-formula release:
 
 https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA/releases/tag/v0.1.66
+
+## v0.1.4 — Scenario Custom Eval Adapter Note
+
+PHI-OMEGA-RUNTIME:SCENARIO_CUSTOM_EVAL_ADAPTER_NOTE:v0.1.4
+
+Generated: 2026-06-23T01:27:03.424067+00:00
+
+This release adds a subordinate adapter note for a Scenario-compatible custom eval entry point.
+
+The adapter is local and non-foundational.
+
+It preserves the hierarchy:
+
+PHI-OMEGA mother formula -> PHI-OMEGA-RUNTIME -> Agent Exchange-Loop Eval -> Scenario-compatible adapter note.
+
+It does not modify the Agent Exchange-Loop Eval tool.
+
+It does not supersede v0.1.3.
+
+It only exposes a compatible entry shape for one external testing environment.
