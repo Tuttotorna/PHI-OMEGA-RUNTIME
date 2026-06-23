@@ -1,31 +1,20 @@
 cff-version: 1.2.0
-message: "If you use this software, cite it as below."
+message: "If you use or reference this software, please cite it using the metadata below."
 title: "PHI-OMEGA-RUNTIME"
-version: "0.1.0"
-date-released: 2026-06-22
+type: software
 authors:
   - family-names: "Brighindi"
     given-names: "Massimiliano"
 repository-code: "https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME"
 url: "https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME"
-abstract: "Compact use-first runtime extracted from PHI-OMEGA-OPERATIONAL-FORMULA. It forces first contact through execution, not reading."
+abstract: "PHI-OMEGA-RUNTIME is a use-first structural audit runtime for PHI-OMEGA, including Agent Exchange-Loop Eval for AI agent testing and a Scenario-compatible adapter note for the local pass / real-use fail failure class."
 keywords:
-  - PHI-OMEGA
-  - structural audit
-  - use-first
-  - false sufficiency
-  - runtime
-references:
-  - type: software
-    title: "PHI-OMEGA-OPERATIONAL-FORMULA"
-    url: "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA/releases/tag/v0.1.65"
-
-
-v0.1.2 Context-Indexed Object Guard generated on 2026-06-22T13:50:25.402231+00:00.
-
-
-v0.1.2 Strict Bare Limit Object Guard generated on 2026-06-22T14:09:52.373288+00:00.
-
-# v0.1.3 Agent Exchange-Loop Eval — append-only lineage note generated 2026-06-23T01:01:44.949731+00:00
-
-# v0.1.4 Scenario Custom Eval Adapter Note — append-only lineage note generated 2026-06-23T01:27:03.424860+00:00
+  - "PHI-OMEGA"
+  - "AI agents"
+  - "agent evaluation"
+  - "false sufficiency"
+  - "exchange loop"
+  - "structural audit"
+  - "runtime"
+version: "v0.1.6"
+date-released: "2026-06-23"

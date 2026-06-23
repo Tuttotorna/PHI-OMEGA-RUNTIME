@@ -169,3 +169,24 @@ It does not make Scenario, LangWatch, or any external framework the center.
 It only shows how the existing Agent Exchange-Loop Eval layer could be used as a Scenario-compatible custom eval for the specific failure class:
 
 local pass / real-use fail.
+
+## v0.1.6 — Zenodo Metadata Repair
+
+PHI-OMEGA-RUNTIME:ZENODO_METADATA_REPAIR:v0.1.6
+
+This release repairs Zenodo metadata after the failed v0.1.5 archive attempt.
+
+Changes:
+
+- replaces `CITATION.cff` with valid CFF/YAML metadata;
+- adds `.zenodo.json` with explicit Zenodo metadata;
+- preserves All rights reserved;
+- does not grant an open license;
+- preserves the v0.1.3 Agent Exchange-Loop Eval runtime key;
+- preserves the v0.1.4 Scenario Custom Eval Adapter Note.
+
+Runtime key:
+- `AGENT_EXCHANGE_LOOP_EVAL.md`
+
+Scenario adapter:
+- `docs/SCENARIO_CUSTOM_EVAL_NOTE.md`

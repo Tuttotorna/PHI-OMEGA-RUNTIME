@@ -95,3 +95,27 @@ It does not modify the Agent Exchange-Loop Eval tool.
 It does not supersede v0.1.3.
 
 It only exposes a compatible entry shape for one external testing environment.
+
+## v0.1.6 — Zenodo Metadata Repair
+
+PHI-OMEGA-RUNTIME:ZENODO_METADATA_REPAIR:v0.1.6
+
+Generated: 2026-06-23T01:43:57.885054+00:00
+
+This release repairs metadata for Zenodo GitHub archiving.
+
+Reason:
+
+Zenodo failed on v0.1.5 because the previous `CITATION.cff` could not be parsed as valid YAML.
+
+Actions:
+
+- replaced `CITATION.cff` with valid CFF/YAML metadata;
+- added `.zenodo.json` with explicit software metadata;
+- used `access_right: closed` to avoid granting an open license by accident;
+- preserved All rights reserved;
+- preserved v0.1.3 Agent Exchange-Loop Eval;
+- preserved v0.1.4 Scenario Custom Eval Adapter Note;
+- did not modify `tools/agent_exchange_loop_eval.py`;
+- did not modify `AGENT_EXCHANGE_LOOP_EVAL.md`;
+- did not modify `docs/SCENARIO_CUSTOM_EVAL_NOTE.md`.
