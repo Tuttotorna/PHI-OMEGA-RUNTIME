@@ -39,3 +39,13 @@ Do not copy every guard from the parent into this runtime.
 That would recreate the original problem.
 
 The runtime keeps the minimum operational surface required to produce an audit output before explanation.
+
+## v0.1.3 parent alignment
+
+PHI-OMEGA-RUNTIME:AGENT_EXCHANGE_LOOP_EVAL:v0.1.3
+
+This runtime layer is aligned with the parent repository v0.1.66 Da/Avere Mother Formula Alignment.
+
+Parent release:
+
+https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA/releases/tag/v0.1.66
