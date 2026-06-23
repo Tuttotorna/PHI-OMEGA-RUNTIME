@@ -151,3 +151,21 @@ Examples:
 - examples/agent_false_sufficiency_case.json
 - examples/agent_exchange_loop_valid_case.json
 - examples/agent_local_pass_field_fail_case.json
+
+## v0.1.4 — Scenario Custom Eval Adapter Note
+
+PHI-OMEGA-RUNTIME:SCENARIO_CUSTOM_EVAL_ADAPTER_NOTE:v0.1.4
+
+This release adds a lightweight adapter note:
+
+- `docs/SCENARIO_CUSTOM_EVAL_NOTE.md`
+
+The note does not redefine PHI-OMEGA.
+
+It does not supersede `AGENT_EXCHANGE_LOOP_EVAL.md`.
+
+It does not make Scenario, LangWatch, or any external framework the center.
+
+It only shows how the existing Agent Exchange-Loop Eval layer could be used as a Scenario-compatible custom eval for the specific failure class:
+
+local pass / real-use fail.
