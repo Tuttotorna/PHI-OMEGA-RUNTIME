@@ -55,3 +55,23 @@ v0.1.2 Context-Indexed Object Guard generated on 2026-06-22T13:50:25.402400+00:0
 
 
 v0.1.2 Strict Bare Limit Object Guard generated on 2026-06-22T14:09:52.373442+00:00.
+
+## v0.1.3 — Agent Exchange-Loop Eval
+
+PHI-OMEGA-RUNTIME:AGENT_EXCHANGE_LOOP_EVAL:v0.1.3
+
+Generated: 2026-06-23T01:01:44.948780+00:00
+
+This release adds a concrete runtime entry layer for AI agent testing.
+
+Purpose:
+
+- reduce first-contact friction;
+- give agent builders a small compatible function;
+- detect false sufficiency in agent output;
+- map task received, action produced, field feedback, observed outcome, and next state;
+- connect the runtime to the v0.1.66 Da/Avere mother formula in the parent repository.
+
+Parent mother-formula release:
+
+https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA/releases/tag/v0.1.66

@@ -1,0 +1,22 @@
+{
+  "agent": "Knowledge-work research agent",
+  "task_received": "Summarize a vendor risk profile for procurement.",
+  "context": "Agent has vendor website and one outdated review, but lacks current legal and security records.",
+  "tools": [
+    "web_summary",
+    "text_eval"
+  ],
+  "constraints": [
+    "Must not recommend approval without current compliance evidence."
+  ],
+  "expected_use": "Procurement risk decision.",
+  "action_produced": "The agent recommends approval because the vendor profile looks correct.",
+  "output": "Vendor appears low risk.",
+  "confidence": 0.84,
+  "field_feedback": "Text eval passed, but compliance team rejected the recommendation.",
+  "return_signal": "Local summary looked correct; real procurement review failed.",
+  "observed_outcome": "Rejected as not sufficient because current legal and security evidence was missing.",
+  "success_criteria": "Decision requires current compliance, security, and legal status.",
+  "validation_method": "Local text eval plus procurement review.",
+  "declared_next_state": "Require compliance evidence before recommendation."
+}

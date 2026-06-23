@@ -115,3 +115,39 @@ Example admitted:
 `object = "project approval deadline"` or `object = "the term 'time' as a semantic concept"`.
 
 See: docs/STRICT_BARE_LIMIT_OBJECT_GUARD.md
+
+## v0.1.3 — Agent Exchange-Loop Eval
+
+PHI-OMEGA-RUNTIME:AGENT_EXCHANGE_LOOP_EVAL:v0.1.3
+
+This release adds the first concrete entry layer for AI agent testing.
+
+The layer does not ask the user to read the whole parent repository first.
+
+It gives a small operational function:
+
+Check whether an AI agent has a real exchange loop before its output is treated as sufficient for use.
+
+The layer maps:
+
+- what the agent receives;
+- what the agent gives back;
+- what the surrounding field returns;
+- whether success criteria are explicit;
+- whether local output hides field failure;
+- where false sufficiency appears;
+- what repair or next state is needed.
+
+New entry file:
+
+- AGENT_EXCHANGE_LOOP_EVAL.md
+
+New tool:
+
+- tools/agent_exchange_loop_eval.py
+
+Examples:
+
+- examples/agent_false_sufficiency_case.json
+- examples/agent_exchange_loop_valid_case.json
+- examples/agent_local_pass_field_fail_case.json
