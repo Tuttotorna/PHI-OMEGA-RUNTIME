@@ -1,6 +1,8 @@
 # PHI-OMEGA-RUNTIME
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20805577.svg)](https://doi.org/10.5281/zenodo.20805577)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21080015.svg)](https://doi.org/10.5281/zenodo.21080015)
+
 
 Compact use-first runtime extracted from PHI-OMEGA-OPERATIONAL-FORMULA.
 
