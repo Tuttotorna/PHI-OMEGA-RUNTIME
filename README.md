@@ -192,3 +192,19 @@ Runtime key:
 
 Scenario adapter:
 - `docs/SCENARIO_CUSTOM_EVAL_NOTE.md`
+
+## Transition Gain Layer
+
+PHI-OMEGA-RUNTIME includes a Transition Gain Layer for estimating preventable loss removed before execution.
+
+Core rule:
+
+Validity first. Convenience second. Gain never authorizes an invalid transition.
+
+The layer estimates avoided cost, saved time, reduced retry churn, reduced audit friction, cost of delay, and net gain from preventing invalid downstream transitions before they execute.
+
+Reference:
+
+- TRANSITION_GAIN_LAYER.md
+- tools/transition_gain_layer.py
+- tests/test_transition_gain_layer_v017.py

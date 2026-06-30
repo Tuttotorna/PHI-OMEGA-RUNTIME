@@ -119,3 +119,21 @@ Actions:
 - did not modify `tools/agent_exchange_loop_eval.py`;
 - did not modify `AGENT_EXCHANGE_LOOP_EVAL.md`;
 - did not modify `docs/SCENARIO_CUSTOM_EVAL_NOTE.md`.
+
+## Transition Gain Layer
+
+Added runtime layer for economic and operational convenience measurement.
+
+Files:
+
+- TRANSITION_GAIN_LAYER.md
+- tools/transition_gain_layer.py
+- tests/test_transition_gain_layer_v017.py
+
+Core invariant:
+
+Validity first. Convenience second. Gain never authorizes an invalid transition.
+
+Operational purpose:
+
+Estimate preventable loss removed before execution, including money, time, energy, retry churn, audit cost, compliance exposure, reputational risk, cost of delay, and replanning value.
