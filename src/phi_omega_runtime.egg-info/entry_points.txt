@@ -1,3 +1,0 @@
-[console_scripts]
-phi-omega-check = phi_omega_transition.cli:check
-phi-omega-demo = phi_omega_transition.cli:demo

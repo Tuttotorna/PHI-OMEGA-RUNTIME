@@ -4,16 +4,24 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "phi-omega-runtime"
-version = "0.1.0"
-description = "Compact use-first runtime extracted from PHI-OMEGA-OPERATIONAL-FORMULA."
+version = "0.1.8"
+description = "PHI-OMEGA Runtime with Transition Sufficiency Framework gate."
+readme = "README.md"
 requires-python = ">=3.9"
+authors = [
+  { name = "Massimiliano Brighindi / Tuttotorna" }
+]
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
+[project.urls]
+Repository = "https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME"
+OperationalFormula = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA"
 
 [project.scripts]
 phi-omega-demo = "phi_omega_transition.cli:demo"
 phi-omega-check = "phi_omega_transition.cli:check"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
