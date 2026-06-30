@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: phi-omega-runtime
+Version: 0.1.0
+Summary: Compact use-first runtime extracted from PHI-OMEGA-OPERATIONAL-FORMULA.
+Requires-Python: >=3.9
