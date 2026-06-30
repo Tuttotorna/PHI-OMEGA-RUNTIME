@@ -1,0 +1,57 @@
+{
+  "transition_id": "clinical_prompt_optimization_001",
+  "state_before": "prompt_candidate",
+  "proposed_action": "promote_prompt_to_production",
+  "state_after": "production_prompt",
+  "required": {
+    "authority": [
+      "clinical_owner_approval"
+    ],
+    "boundary": [
+      "production_clinical_agent"
+    ],
+    "context": [
+      "clinical_eval_dataset"
+    ],
+    "evidence": [
+      "hallucination_rate",
+      "omission_rate"
+    ],
+    "policy": [
+      "clinical_safety_policy"
+    ],
+    "time_window": [
+      "current_eval_window"
+    ],
+    "recovery": [
+      "rollback_prompt_version"
+    ],
+    "verifier_depth": "D2",
+    "minimum_gain": 0
+  },
+  "supported": {
+    "authority": [
+      "clinical_owner_approval"
+    ],
+    "boundary": [
+      "production_clinical_agent"
+    ],
+    "context": [
+      "clinical_eval_dataset"
+    ],
+    "evidence": [
+      "hallucination_rate"
+    ],
+    "policy": [
+      "clinical_safety_policy"
+    ],
+    "time_window": [
+      "current_eval_window"
+    ],
+    "recovery": [
+      "rollback_prompt_version"
+    ],
+    "verifier_depth": "D2",
+    "estimated_gain": 12000
+  }
+}

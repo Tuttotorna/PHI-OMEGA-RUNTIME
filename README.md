@@ -208,3 +208,25 @@ Reference:
 - TRANSITION_GAIN_LAYER.md
 - tools/transition_gain_layer.py
 - tests/test_transition_gain_layer_v017.py
+
+## PHI-OMEGA Transition Sufficiency Framework
+
+Install directly from GitHub:
+
+    pip install "git+https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME.git"
+
+Run the demo:
+
+    phi-omega-demo
+
+Run the transition checker on a JSON file:
+
+    phi-omega-check examples/transition_demo.json
+
+Core formula:
+
+    Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)
+
+A transition may proceed only when the authority, boundary, context, evidence, policy, time window, verifier depth, recovery path and gain required by the transition are supported at execution time.
+
+Gain can justify checking a transition. Gain cannot authorize an invalid transition.
