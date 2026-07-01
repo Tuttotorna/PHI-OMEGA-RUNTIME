@@ -20,7 +20,7 @@ def test_citation_cff_exists_and_has_valid_basic_shape():
     assert 'family-names: "Brighindi"' in text
     assert 'given-names: "Massimiliano"' in text
     assert 'repository-code: "https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME"' in text
-    assert 'version: "v0.1.9"' in text
+    assert 'version: "v0.2.0"' in text
     assert 'date-released: "2026-07-01"' in text
     assert "\\u003c" not in text
     assert "\\u003e" not in text
@@ -31,7 +31,7 @@ def test_zenodo_json_exists_and_is_valid_json():
     assert data["title"] == "PHI-OMEGA-RUNTIME"
     assert data["upload_type"] == "software"
     assert data["access_right"] == "closed"
-    assert data["version"] == "v0.1.9"
+    assert data["version"] == "v0.2.0"
     assert data["publication_date"] == "2026-06-23"
     assert data["creators"][0]["name"] == "Brighindi, Massimiliano"
 

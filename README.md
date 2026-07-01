@@ -1,8 +1,41 @@
 # PHI-OMEGA-RUNTIME
 
+<!-- PHI-OMEGA-RUNTIME-V020-STABLE-SURFACE:START -->
+
+## Stable Interface — v0.2.0
+
+v0.2.0 stabilizes the runtime's public executable surface.
+
+Stable commands:
+
+- phi-omega-demo
+- phi-omega-check
+- phi-omega-runtime
+- phi-omega-agent-eval
+
+Stable schema files:
+
+- schemas/transition_case.schema.json
+- schemas/transition_result.schema.json
+
+Core invariant:
+
+Valid(tau) iff Required(tau) subset Supported(tau)
+
+Release scope:
+
+- no new theoretical layer;
+- schema and CLI stabilization;
+- public surface documentation;
+- tested transition result shape;
+- tested HARD_BLOCK behavior inherited from v0.1.9.
+
+<!-- PHI-OMEGA-RUNTIME-V020-STABLE-SURFACE:END -->
+
+
 <!-- PHI-OMEGA-RUNTIME-CURRENT-STATE:START -->
 
-## Current Runtime State — v0.1.9
+## Current Runtime State — v0.2.0
 
 PHI-OMEGA-RUNTIME is currently aligned as a compact use-first runtime surface with:
 
@@ -126,7 +159,7 @@ See: docs/CONTEXT_INDEXED_OBJECT_GUARD.md
 
 ## Status
 
-Version: v0.1.9
+Version: v0.2.0
 
 Release type: initial runtime extraction
 

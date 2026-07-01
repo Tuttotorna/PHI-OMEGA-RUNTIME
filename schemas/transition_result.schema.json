@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME/schemas/transition_result.schema.json",
+  "title": "PHI-OMEGA Transition Sufficiency Result",
+  "type": "object",
+  "required": [
+    "transition_id",
+    "decision",
+    "valid",
+    "formula",
+    "state_before",
+    "proposed_action",
+    "state_after",
+    "missing_requirements",
+    "hard_block_reasons",
+    "required_subset_supported",
+    "verifier_depth_required",
+    "verifier_depth_supported",
+    "verifier_depth_ok",
+    "minimum_gain_required",
+    "estimated_gain_supported",
+    "gain_ok",
+    "reason",
+    "next_allowed_transition"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "transition_id": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "REPAIR",
+        "SOFT_BLOCK",
+        "HARD_BLOCK"
+      ]
+    },
+    "valid": {
+      "type": "boolean"
+    },
+    "formula": {
+      "type": "string"
+    },
+    "state_before": {
+      "type": "string"
+    },
+    "proposed_action": {
+      "type": "string"
+    },
+    "state_after": {
+      "type": "string"
+    },
+    "missing_requirements": {
+      "type": "object"
+    },
+    "hard_block_reasons": {
+      "type": "object"
+    },
+    "required_subset_supported": {
+      "type": "boolean"
+    },
+    "verifier_depth_required": {
+      "type": "string",
+      "enum": [
+        "D0",
+        "D1",
+        "D2",
+        "D3"
+      ]
+    },
+    "verifier_depth_supported": {
+      "type": "string",
+      "enum": [
+        "D0",
+        "D1",
+        "D2",
+        "D3"
+      ]
+    },
+    "verifier_depth_ok": {
+      "type": "boolean"
+    },
+    "minimum_gain_required": {
+      "type": "number"
+    },
+    "estimated_gain_supported": {
+      "type": "number"
+    },
+    "gain_ok": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "next_allowed_transition": {
+      "type": "string"
+    }
+  }
+}

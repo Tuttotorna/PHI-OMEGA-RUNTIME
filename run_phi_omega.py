@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
-VERSION = "v0.1.9"
+VERSION = "v0.2.0"
 
 PARENT_REPO = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA"
 PARENT_RELEASE = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA/releases/tag/v0.1.66"

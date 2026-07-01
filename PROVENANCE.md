@@ -160,3 +160,23 @@ Changes:
 
 No theoretical expansion is introduced. The patch aligns packaging, version surface,
 transition schema, and executable decision semantics.
+
+
+## v0.2.0 — Schema + CLI Stabilization Release
+
+Date: 2026-07-01
+
+This release stabilizes the public runtime interface after v0.1.9.
+
+Changes:
+- Aligns package/runtime metadata to v0.2.0.
+- Adds schemas/transition_result.schema.json.
+- Preserves schemas/transition_case.schema.json as the input case schema.
+- Adds docs/CLI_REFERENCE.md.
+- Adds docs/TRANSITION_SCHEMA.md.
+- Adds docs/STABLE_INTERFACE_V020.md.
+- Adds tests/test_schema_cli_stabilization_v020.py.
+- Preserves the v0.1.9 hard transition gate semantics.
+- Preserves the invariant: Valid(tau) iff Required(tau) subset Supported(tau).
+
+No theoretical expansion is introduced. This is an interface stabilization release.

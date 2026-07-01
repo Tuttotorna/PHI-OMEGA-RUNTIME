@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "phi-omega-runtime"
-version = "0.1.9"
+version = "0.2.0"
 description = "PHI-OMEGA Runtime with Transition Sufficiency Framework gate."
 readme = "README.md"
 requires-python = ">=3.9"
