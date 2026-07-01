@@ -137,3 +137,26 @@ Validity first. Convenience second. Gain never authorizes an invalid transition.
 Operational purpose:
 
 Estimate preventable loss removed before execution, including money, time, energy, retry churn, audit cost, compliance exposure, reputational risk, cost of delay, and replanning value.
+
+
+## v0.1.9 — Runtime Surface Alignment / Hard Gate Patch
+
+Date: 2026-07-01
+
+This release aligns the runtime surface with the current Transition Sufficiency Framework.
+
+Changes:
+- Aligns repository runtime version metadata to v0.1.9.
+- Exposes historical audit runtime as phi-omega-runtime.
+- Exposes Agent Exchange-Loop Eval as phi-omega-agent-eval.
+- Keeps Transition Sufficiency CLI as phi-omega-check and phi-omega-demo.
+- Adds schemas/transition_case.schema.json.
+- Adds explicit hard transition support gates:
+  - hard_authority
+  - hard_boundary
+  - hard_policy
+- Makes HARD_BLOCK reachable when explicit non-repairable hard support is missing.
+- Preserves the core invariant: Valid(tau) iff Required(tau) subset Supported(tau).
+
+No theoretical expansion is introduced. The patch aligns packaging, version surface,
+transition schema, and executable decision semantics.

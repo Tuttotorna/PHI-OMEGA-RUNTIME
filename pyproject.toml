@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "phi-omega-runtime"
-version = "0.1.8"
+version = "0.1.9"
 description = "PHI-OMEGA Runtime with Transition Sufficiency Framework gate."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -19,6 +19,8 @@ OperationalFormula = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMUL
 [project.scripts]
 phi-omega-demo = "phi_omega_transition.cli:demo"
 phi-omega-check = "phi_omega_transition.cli:check"
+phi-omega-runtime = "phi_omega_transition.runtime_audit:main"
+phi-omega-agent-eval = "phi_omega_transition.agent_exchange_loop_eval:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

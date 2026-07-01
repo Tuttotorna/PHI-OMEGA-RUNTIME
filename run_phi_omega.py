@@ -7,12 +7,12 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
-VERSION = "v0.1.2"
+VERSION = "v0.1.9"
 
 PARENT_REPO = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA"
-PARENT_RELEASE = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA/releases/tag/v0.1.65"
-PARENT_TAG = "v0.1.65"
-PARENT_COMMIT = "910ce08ceffe4686e2e45123986c1fac6d1434a4"
+PARENT_RELEASE = "https://github.com/Tuttotorna/PHI-OMEGA-OPERATIONAL-FORMULA/releases/tag/v0.1.66"
+PARENT_TAG = "v0.1.66"
+PARENT_COMMIT = "8f4ff1d7ddc74d044f1706adcbd4cb70bdd4753e"
 
 SUPPORTED_EVIDENCE_PRODUCERS = {
     "OMNIABASE",

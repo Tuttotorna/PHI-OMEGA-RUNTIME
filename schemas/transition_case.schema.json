@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME/schemas/transition_case.schema.json",
+  "title": "PHI-OMEGA Transition Sufficiency Case",
+  "type": "object",
+  "required": [
+    "transition_id",
+    "proposed_action",
+    "required",
+    "supported"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "transition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state_before": {
+      "type": "string"
+    },
+    "proposed_action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state_after": {
+      "type": "string"
+    },
+    "required": {
+      "$ref": "#/$defs/requirements"
+    },
+    "supported": {
+      "$ref": "#/$defs/support"
+    }
+  },
+  "$defs": {
+    "string_array": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "verifier_depth": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "D0",
+            "D1",
+            "D2",
+            "D3",
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        }
+      ]
+    },
+    "requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "$ref": "#/$defs/string_array"
+        },
+        "boundary": {
+          "$ref": "#/$defs/string_array"
+        },
+        "context": {
+          "$ref": "#/$defs/string_array"
+        },
+        "evidence": {
+          "$ref": "#/$defs/string_array"
+        },
+        "policy": {
+          "$ref": "#/$defs/string_array"
+        },
+        "time_window": {
+          "$ref": "#/$defs/string_array"
+        },
+        "recovery": {
+          "$ref": "#/$defs/string_array"
+        },
+        "hard_authority": {
+          "$ref": "#/$defs/string_array"
+        },
+        "hard_boundary": {
+          "$ref": "#/$defs/string_array"
+        },
+        "hard_policy": {
+          "$ref": "#/$defs/string_array"
+        },
+        "verifier_depth": {
+          "$ref": "#/$defs/verifier_depth"
+        },
+        "minimum_gain": {
+          "type": "number"
+        }
+      }
+    },
+    "support": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "$ref": "#/$defs/string_array"
+        },
+        "boundary": {
+          "$ref": "#/$defs/string_array"
+        },
+        "context": {
+          "$ref": "#/$defs/string_array"
+        },
+        "evidence": {
+          "$ref": "#/$defs/string_array"
+        },
+        "policy": {
+          "$ref": "#/$defs/string_array"
+        },
+        "time_window": {
+          "$ref": "#/$defs/string_array"
+        },
+        "recovery": {
+          "$ref": "#/$defs/string_array"
+        },
+        "hard_authority": {
+          "$ref": "#/$defs/string_array"
+        },
+        "hard_boundary": {
+          "$ref": "#/$defs/string_array"
+        },
+        "hard_policy": {
+          "$ref": "#/$defs/string_array"
+        },
+        "verifier_depth": {
+          "$ref": "#/$defs/verifier_depth"
+        },
+        "estimated_gain": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

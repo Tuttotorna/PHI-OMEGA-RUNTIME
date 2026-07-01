@@ -13,10 +13,27 @@ class Decision(str, Enum):
 
 
 class VerifierDepth(IntEnum):
-    D0 = 0  # attested only
-    D1 = 1  # local / proprietary verifier
-    D2 = 2  # controlled reproducibility
-    D3 = 3  # public reproducibility
+    D0 = 0
+    D1 = 1
+    D2 = 2
+    D3 = 3
+
+
+SOFT_SUPPORT_FIELDS = (
+    "authority",
+    "boundary",
+    "context",
+    "evidence",
+    "policy",
+    "time_window",
+    "recovery",
+)
+
+HARD_SUPPORT_FIELDS = (
+    "hard_authority",
+    "hard_boundary",
+    "hard_policy",
+)
 
 
 @dataclass(frozen=True)
@@ -28,6 +45,11 @@ class TransitionRequirements:
     policy: list[str] = field(default_factory=list)
     time_window: list[str] = field(default_factory=list)
     recovery: list[str] = field(default_factory=list)
+
+    hard_authority: list[str] = field(default_factory=list)
+    hard_boundary: list[str] = field(default_factory=list)
+    hard_policy: list[str] = field(default_factory=list)
+
     verifier_depth: VerifierDepth = VerifierDepth.D0
     minimum_gain: float = 0.0
 
@@ -41,6 +63,11 @@ class TransitionSupport:
     policy: list[str] = field(default_factory=list)
     time_window: list[str] = field(default_factory=list)
     recovery: list[str] = field(default_factory=list)
+
+    hard_authority: list[str] = field(default_factory=list)
+    hard_boundary: list[str] = field(default_factory=list)
+    hard_policy: list[str] = field(default_factory=list)
+
     verifier_depth: VerifierDepth = VerifierDepth.D0
     estimated_gain: float = 0.0
 
@@ -101,6 +128,9 @@ def transition_from_dict(data: dict[str, Any]) -> Transition:
             policy=_as_list(required.get("policy", [])),
             time_window=_as_list(required.get("time_window", [])),
             recovery=_as_list(required.get("recovery", [])),
+            hard_authority=_as_list(required.get("hard_authority", [])),
+            hard_boundary=_as_list(required.get("hard_boundary", [])),
+            hard_policy=_as_list(required.get("hard_policy", [])),
             verifier_depth=_depth_from_value(required.get("verifier_depth", "D0")),
             minimum_gain=float(required.get("minimum_gain", 0.0)),
         ),
@@ -112,49 +142,51 @@ def transition_from_dict(data: dict[str, Any]) -> Transition:
             policy=_as_list(supported.get("policy", [])),
             time_window=_as_list(supported.get("time_window", [])),
             recovery=_as_list(supported.get("recovery", [])),
+            hard_authority=_as_list(supported.get("hard_authority", [])),
+            hard_boundary=_as_list(supported.get("hard_boundary", [])),
+            hard_policy=_as_list(supported.get("hard_policy", [])),
             verifier_depth=_depth_from_value(supported.get("verifier_depth", "D0")),
             estimated_gain=float(supported.get("estimated_gain", 0.0)),
         ),
     )
 
 
+def _missing_by_field(t: Transition, fields: tuple[str, ...]) -> dict[str, list[str]]:
+    missing: dict[str, list[str]] = {}
+    for field_name in fields:
+        required_items = getattr(t.required, field_name)
+        supported_items = getattr(t.supported, field_name)
+        gap = _missing(required_items, supported_items)
+        if gap:
+            missing[field_name] = gap
+    return missing
+
+
 def evaluate_transition(t: Transition) -> dict[str, Any]:
-    """
-    PHI-OMEGA Transition Sufficiency Framework.
+    soft_missing = _missing_by_field(t, SOFT_SUPPORT_FIELDS)
+    hard_missing = _missing_by_field(t, HARD_SUPPORT_FIELDS)
 
-    Core formula:
-
-        Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)
-
-    A transition may proceed only when the authority, boundary, context,
-    evidence, policy, time window, verifier depth, recovery path and gain
-    required by the transition are supported at execution time.
-
-    Gain can justify checking a transition.
-    Gain cannot authorize an invalid transition.
-    """
-
-    missing = {
-        "authority": _missing(t.required.authority, t.supported.authority),
-        "boundary": _missing(t.required.boundary, t.supported.boundary),
-        "context": _missing(t.required.context, t.supported.context),
-        "evidence": _missing(t.required.evidence, t.supported.evidence),
-        "policy": _missing(t.required.policy, t.supported.policy),
-        "time_window": _missing(t.required.time_window, t.supported.time_window),
-        "recovery": _missing(t.required.recovery, t.supported.recovery),
-    }
-
-    missing_requirements = {
-        key: value for key, value in missing.items() if value
-    }
+    missing_requirements = {**soft_missing, **hard_missing}
 
     required_subset_supported = not missing_requirements
     verifier_ok = t.supported.verifier_depth >= t.required.verifier_depth
     gain_ok = t.supported.estimated_gain >= t.required.minimum_gain
+    hard_block_required = bool(hard_missing)
 
-    valid = required_subset_supported and verifier_ok and gain_ok
+    valid = (
+        required_subset_supported
+        and verifier_ok
+        and gain_ok
+        and not hard_block_required
+    )
 
-    if valid:
+    if hard_block_required:
+        decision = Decision.HARD_BLOCK
+        reason = (
+            "Required(τ) contains non-repairable hard support that is not present "
+            "in Supported(τ). Execution must be blocked."
+        )
+    elif valid:
         decision = Decision.ALLOW
         reason = (
             "Required(τ) is contained in Supported(τ). "
@@ -185,6 +217,8 @@ def evaluate_transition(t: Transition) -> dict[str, Any]:
         "proposed_action": t.proposed_action,
         "state_after": t.state_after,
         "missing_requirements": missing_requirements,
+        "hard_block_reasons": hard_missing,
+        "required_subset_supported": required_subset_supported,
         "verifier_depth_required": t.required.verifier_depth.name,
         "verifier_depth_supported": t.supported.verifier_depth.name,
         "verifier_depth_ok": verifier_ok,

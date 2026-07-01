@@ -1,0 +1,17 @@
+{
+  "transition_id": "v019_hard_block_demo",
+  "state_before": "candidate",
+  "proposed_action": "execute_irreversible_transition",
+  "state_after": "blocked",
+  "required": {
+    "hard_boundary": [
+      "non_repairable_boundary"
+    ],
+    "verifier_depth": "D1",
+    "minimum_gain": 0
+  },
+  "supported": {
+    "verifier_depth": "D1",
+    "estimated_gain": 999
+  }
+}

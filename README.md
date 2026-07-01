@@ -1,5 +1,32 @@
 # PHI-OMEGA-RUNTIME
 
+<!-- PHI-OMEGA-RUNTIME-CURRENT-STATE:START -->
+
+## Current Runtime State — v0.1.9
+
+PHI-OMEGA-RUNTIME is currently aligned as a compact use-first runtime surface with:
+
+- historical audit runtime exposed as phi-omega-runtime;
+- Agent Exchange-Loop Eval exposed as phi-omega-agent-eval;
+- Transition Sufficiency Framework exposed as phi-omega-check and phi-omega-demo;
+- explicit hard transition gates through hard_authority, hard_boundary, and hard_policy.
+
+Core transition rule:
+
+Valid(tau) iff Required(tau) subset Supported(tau)
+
+Execution remains blocked unless the support required by the transition exists at execution time.
+
+Decision semantics:
+
+- ALLOW: all required support, verifier depth, and gain threshold are satisfied.
+- REPAIR: ordinary required support is missing and must be repaired before execution.
+- SOFT_BLOCK: support may exist, but verifier depth or gain threshold is insufficient.
+- HARD_BLOCK: explicit non-repairable hard authority, boundary, or policy support is missing.
+
+<!-- PHI-OMEGA-RUNTIME-CURRENT-STATE:END -->
+
+
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21080015.svg)](https://doi.org/10.5281/zenodo.21080015)
 
@@ -99,7 +126,7 @@ See: docs/CONTEXT_INDEXED_OBJECT_GUARD.md
 
 ## Status
 
-Version: v0.1.2
+Version: v0.1.9
 
 Release type: initial runtime extraction
 
