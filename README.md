@@ -1,5 +1,28 @@
 # PHI-OMEGA-RUNTIME
 
+<!-- PHI-OMEGA-RUNTIME-FAILURE-MAP:START -->
+
+## Runtime Failure Map
+
+This repository now includes a public field map of agentic runtime failures classified as transition sufficiency cases.
+
+Files:
+
+- `data/runtime_failure_map.json`
+- `docs/RUNTIME_FAILURE_MAP.md`
+- `tools/runtime_failure_map.py`
+
+Core statement:
+
+```text
+These are not separate bugs. They are transition sufficiency failures.
+```
+
+The map does not claim adoption, endorsement, partnership, or certification by any listed project.
+
+<!-- PHI-OMEGA-RUNTIME-FAILURE-MAP:END -->
+
+
 <!-- PHI-OMEGA-RUNTIME-V020-STABLE-SURFACE:START -->
 
 ## Stable Interface — v0.2.0

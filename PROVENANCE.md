@@ -180,3 +180,26 @@ Changes:
 - Preserves the invariant: Valid(tau) iff Required(tau) subset Supported(tau).
 
 No theoretical expansion is introduced. This is an interface stabilization release.
+
+
+## Runtime Failure Map — Transition Sufficiency Cases
+
+Date: 2026-07-01
+
+This branch adds a field map of public runtime and agentic-system failure signals.
+
+Added:
+- data/runtime_failure_map.json
+- docs/RUNTIME_FAILURE_MAP.md
+- tools/runtime_failure_map.py
+- tests/test_runtime_failure_map.py
+
+Purpose:
+- classify independent runtime issues as transition sufficiency cases;
+- preserve non-endorsement and non-adoption boundaries;
+- provide a repeatable field-map format for external evidence accumulation.
+
+Core invariant:
+Valid(tau) iff Required(tau) subset Supported(tau)
+
+No release or tag is created by this branch.

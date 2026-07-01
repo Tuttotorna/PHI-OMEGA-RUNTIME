@@ -1,0 +1,299 @@
+{
+  "map_id": "phi_omega_runtime_failure_map_001",
+  "title": "PHI-OMEGA Runtime Failure Map — Transition Sufficiency Cases",
+  "status": "field_map_not_endorsement",
+  "created": "2026-07-01",
+  "core_invariant": "Valid(tau) iff Required(tau) subset Supported(tau)",
+  "scope": [
+    "agentic runtime governance",
+    "tool-call authorization",
+    "permission prompts",
+    "checkpoint replay",
+    "state persistence",
+    "verifier depth",
+    "downstream state change"
+  ],
+  "non_claims": [
+    "No project listed here is claimed to use PHI-OMEGA.",
+    "No endorsement, partnership, certification, or adoption is claimed.",
+    "Each item is treated only as a public external failure signal.",
+    "The map is an operational classification layer, not theoretical proof."
+  ],
+  "cases": [
+    {
+      "system": "CrewAI",
+      "repository": "crewAIInc/crewAI",
+      "issue": "#4877",
+      "title": "[FEATURE] GuardrailProvider interface for pre-tool-call authorization",
+      "url": "https://github.com/crewAIInc/crewAI/issues/4877",
+      "observed_failure_class": "missing pre-tool-call authorization boundary",
+      "transition_tau": "agent tool call before downstream tool execution",
+      "required_tau": [
+        "per-call authority",
+        "tool boundary",
+        "caller identity",
+        "policy decision before execution",
+        "fail-closed behavior"
+      ],
+      "supported_tau": [
+        "task-level authorization",
+        "BeforeToolCallHook surface",
+        "proposed provider interface"
+      ],
+      "missing_support": [
+        "standard provider contract for pre-tool-call authorization",
+        "uniform per-call decision interface"
+      ],
+      "runtime_decision": "REPAIR",
+      "minimal_gate": "GuardrailProvider returns ALLOW/BLOCK before each tool call.",
+      "phi_omega_mapping": "tool call = proposed transition tau; execution allowed only when Required(tau) is supported before downstream state change."
+    },
+    {
+      "system": "CrewAI",
+      "repository": "crewAIInc/crewAI",
+      "issue": "#6165",
+      "title": "feat: add tool call release decisions",
+      "url": "https://github.com/crewAIInc/crewAI/issues/6165",
+      "observed_failure_class": "tool-call release decision boundary",
+      "transition_tau": "release or block a tool call after runtime evaluation",
+      "required_tau": [
+        "explicit release decision",
+        "tool-call state binding",
+        "decision provenance"
+      ],
+      "supported_tau": [
+        "tool call execution pipeline",
+        "release decision proposal"
+      ],
+      "missing_support": [
+        "stable transition decision schema",
+        "auditable release reason"
+      ],
+      "runtime_decision": "REPAIR",
+      "minimal_gate": "Emit a structured decision object for every tool-call release.",
+      "phi_omega_mapping": "release decision is a transition sufficiency result."
+    },
+    {
+      "system": "Anthropic Claude Code",
+      "repository": "anthropics/claude-code",
+      "issue": "#65910",
+      "title": "[SECURITY-BUG] Permission prompt is silently replaced by a newer pending approval, allowing wrong command approval",
+      "url": "https://github.com/anthropics/claude-code/issues/65910",
+      "observed_failure_class": "approval identity replacement / LIFO prompt ambiguity",
+      "transition_tau": "manual approval binds to command execution",
+      "required_tau": [
+        "approval-command identity binding",
+        "stable prompt identity",
+        "non-overwriteable pending approval state",
+        "human decision tied to exact command"
+      ],
+      "supported_tau": [
+        "manual approve mode",
+        "pending approval stack"
+      ],
+      "missing_support": [
+        "hard identity binding between approval prompt and command",
+        "pre-execution mismatch block"
+      ],
+      "runtime_decision": "HARD_BLOCK",
+      "minimal_gate": "Block execution if approval_id, command_hash, and visible prompt do not match.",
+      "phi_omega_mapping": "approval is invalid if Required(command execution) is not supported by the exact approved prompt state."
+    },
+    {
+      "system": "Anthropic Claude Code",
+      "repository": "anthropics/claude-code",
+      "issue": "#66173",
+      "title": "[BUG] No permission prompt before reading/searching files outside the working directory",
+      "url": "https://github.com/anthropics/claude-code/issues/66173",
+      "observed_failure_class": "filesystem boundary access without explicit permission transition",
+      "transition_tau": "read/search outside working directory",
+      "required_tau": [
+        "working-directory boundary",
+        "explicit permission prompt",
+        "path scope validation",
+        "pre-read authorization"
+      ],
+      "supported_tau": [
+        "file read/search capability"
+      ],
+      "missing_support": [
+        "permission prompt for out-of-boundary filesystem access"
+      ],
+      "runtime_decision": "HARD_BLOCK",
+      "minimal_gate": "Require explicit authorization before any file operation outside declared workspace boundary.",
+      "phi_omega_mapping": "outside-workdir access is a boundary transition requiring hard_boundary support."
+    },
+    {
+      "system": "Microsoft VS Code / Copilot",
+      "repository": "microsoft/vscode",
+      "issue": "#308999",
+      "title": "Copilot Chat 0.43.0: Claude agent mode silent — tool permission stream closes before response received",
+      "url": "https://github.com/microsoft/vscode/issues/308999",
+      "observed_failure_class": "permission stream closes before final response state",
+      "transition_tau": "tool permission stream authorizes or closes before agent response completion",
+      "required_tau": [
+        "permission stream liveness",
+        "response-state synchronization",
+        "tool-call completion signal",
+        "recoverable close semantics"
+      ],
+      "supported_tau": [
+        "agent mode",
+        "tool permission stream"
+      ],
+      "missing_support": [
+        "binding between stream close and response received state"
+      ],
+      "runtime_decision": "REPAIR",
+      "minimal_gate": "Do not close permission stream until response completion or explicit cancellation state is recorded.",
+      "phi_omega_mapping": "stream close is a state transition requiring supported completion evidence."
+    },
+    {
+      "system": "Microsoft Semantic Kernel",
+      "repository": "microsoft/semantic-kernel",
+      "issue": "#14072",
+      "title": "Python: Lack of Runtime Access Control in Auto Function Invocation Leads to Unauthorized Execution via Indirect Prompt Injection",
+      "url": "https://github.com/microsoft/semantic-kernel/issues/14072",
+      "observed_failure_class": "auto function invocation without runtime access control",
+      "transition_tau": "model-selected function invocation",
+      "required_tau": [
+        "runtime access control",
+        "function-level authority",
+        "prompt-injection boundary",
+        "policy check before invocation"
+      ],
+      "supported_tau": [
+        "auto function invocation"
+      ],
+      "missing_support": [
+        "runtime RBAC or approval mechanism for auto invocation"
+      ],
+      "runtime_decision": "HARD_BLOCK",
+      "minimal_gate": "Block auto function invocation unless function authority is explicitly supported at runtime.",
+      "phi_omega_mapping": "function invocation is unauthorized if hard_authority is missing before execution."
+    },
+    {
+      "system": "LangGraph",
+      "repository": "langchain-ai/langgraph",
+      "issue": "#7417",
+      "title": "Long tool calls silently re-executed from checkpoint on LangGraph Cloud",
+      "url": "https://github.com/langchain-ai/langgraph/issues/7417",
+      "observed_failure_class": "checkpoint replay without transition identity preservation",
+      "transition_tau": "checkpoint restoration triggers tool-call re-execution",
+      "required_tau": [
+        "tool-call idempotency",
+        "checkpoint provenance",
+        "replay authorization",
+        "prior execution detection"
+      ],
+      "supported_tau": [
+        "checkpoint persistence",
+        "tool-call retry/replay behavior"
+      ],
+      "missing_support": [
+        "stable replay decision boundary",
+        "execution identity binding across checkpoint restore"
+      ],
+      "runtime_decision": "REPAIR",
+      "minimal_gate": "Before replay, compare checkpoint execution identity and require replay authorization.",
+      "phi_omega_mapping": "checkpoint replay is a downstream transition, not a neutral restore."
+    },
+    {
+      "system": "Kubernetes",
+      "repository": "kubernetes/kubernetes",
+      "issue": "#138950",
+      "title": "KMSv2: Write DEK expiration is indefinitely extended despite unhealthy KMS plugin status",
+      "url": "https://github.com/kubernetes/kubernetes/issues/138950",
+      "observed_failure_class": "state validity extended despite unhealthy support dependency",
+      "transition_tau": "extend DEK expiration / preserve encryption write state",
+      "required_tau": [
+        "healthy KMS plugin status",
+        "valid cryptographic support",
+        "expiration authority",
+        "failure-state cutoff"
+      ],
+      "supported_tau": [
+        "StatusResponse.Healthz not ok",
+        "DEK expiration extension behavior"
+      ],
+      "missing_support": [
+        "hard policy that blocks extension when KMS support is unhealthy"
+      ],
+      "runtime_decision": "HARD_BLOCK",
+      "minimal_gate": "Do not extend DEK expiration when KMS health support is invalid.",
+      "phi_omega_mapping": "cryptographic state extension requires supported dependency health at transition time."
+    },
+    {
+      "system": "Microsoft AutoGen",
+      "repository": "microsoft/autogen",
+      "issue": "#7372",
+      "title": "Cryptographic governance layer for AutoGen distributed agent runtime",
+      "url": "https://github.com/microsoft/autogen/issues/7372",
+      "observed_failure_class": "distributed agent governance needs cryptographic transition authority",
+      "transition_tau": "distributed agent action accepted across runtime boundary",
+      "required_tau": [
+        "cryptographic identity",
+        "verifiable governance decision",
+        "cross-agent authority",
+        "recomputable provenance"
+      ],
+      "supported_tau": [
+        "distributed runtime governance proposal"
+      ],
+      "missing_support": [
+        "stable verifier depth definition",
+        "transition-level authority model"
+      ],
+      "runtime_decision": "REPAIR",
+      "minimal_gate": "Bind distributed agent action to verifiable identity, authority, and recomputable decision evidence.",
+      "phi_omega_mapping": "distributed agent action must satisfy verifier depth and authority before state acceptance."
+    },
+    {
+      "system": "Ibex Agent Verification",
+      "repository": "safal207/ibex-agent-verification",
+      "issue": "#59",
+      "title": "feat: define verifier depth as transition authority",
+      "url": "https://github.com/safal207/ibex-agent-verification/issues/59",
+      "observed_failure_class": "verifier depth becomes transition authority",
+      "transition_tau": "agent action promoted based on verifier depth",
+      "required_tau": [
+        "declared verifier depth",
+        "transition authority",
+        "reproducibility level",
+        "acceptance threshold"
+      ],
+      "supported_tau": [
+        "merged verifier depth feature"
+      ],
+      "missing_support": [],
+      "runtime_decision": "ALLOW",
+      "minimal_gate": "Use verifier depth as a first-class transition authority field.",
+      "phi_omega_mapping": "verifier_depth_required <= verifier_depth_supported is a transition sufficiency condition."
+    },
+    {
+      "system": "Microsoft Agent Governance Toolkit",
+      "repository": "microsoft/agent-governance-toolkit",
+      "issue": "#3204",
+      "title": "Proposal: Transition-Sufficiency Gate before downstream state change",
+      "url": "https://github.com/microsoft/agent-governance-toolkit/issues/3204",
+      "observed_failure_class": "governance requires transition sufficiency before downstream state change",
+      "transition_tau": "agentic governance decision releases downstream state change",
+      "required_tau": [
+        "required support declaration",
+        "supported evidence declaration",
+        "decision gate",
+        "downstream state boundary"
+      ],
+      "supported_tau": [
+        "proposal for transition-sufficiency gate"
+      ],
+      "missing_support": [
+        "standardized gate interface",
+        "stable result schema"
+      ],
+      "runtime_decision": "REPAIR",
+      "minimal_gate": "Require a transition sufficiency result before downstream state change.",
+      "phi_omega_mapping": "direct external expression of the PHI-OMEGA-RUNTIME gate pattern."
+    }
+  ]
+}
