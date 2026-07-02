@@ -4,6 +4,19 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21080015.svg)](https://doi.org/10.5281/zenodo.21080015)
 
 
+
+<!-- README_DOI_V021_2026_07_02 -->
+
+## Current citable release
+
+Release: v0.2.1 — Transition Sufficiency Conformance Contract
+
+DOI: [10.5281/zenodo.21126013](https://doi.org/10.5281/zenodo.21126013)
+
+GitHub release: https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME/releases/tag/v0.2.1
+
+Scope note: this DOI cites the PHI-OMEGA-RUNTIME v0.2.1 conformance artifact. It does not imply external adoption, endorsement, partnership, certification, or official integration by any external project.
+
 Compact use-first runtime extracted from PHI-OMEGA-OPERATIONAL-FORMULA.
 
 This repository is not the full theory archive.

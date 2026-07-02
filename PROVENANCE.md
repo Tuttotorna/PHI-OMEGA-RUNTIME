@@ -195,3 +195,24 @@ Scope:
 Invariant preserved:
 
     Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)
+
+<!-- README_DOI_V021_2026_07_02_PROVENANCE -->
+
+## 2026-07-02 — README DOI update for v0.2.1
+
+Added the Zenodo DOI for PHI-OMEGA-RUNTIME v0.2.1 to README.md.
+
+DOI: 10.5281/zenodo.21126013
+
+DOI URL: https://doi.org/10.5281/zenodo.21126013
+
+Release: v0.2.1 — Transition Sufficiency Conformance Contract
+
+Scope:
+
+- records citable release DOI;
+- records no external adoption claim;
+- records no endorsement claim;
+- records no partnership claim;
+- records no certification claim;
+- records no official integration claim.
