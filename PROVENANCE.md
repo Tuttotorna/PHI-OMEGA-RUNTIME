@@ -137,3 +137,34 @@ Validity first. Convenience second. Gain never authorizes an invalid transition.
 Operational purpose:
 
 Estimate preventable loss removed before execution, including money, time, energy, retry churn, audit cost, compliance exposure, reputational risk, cost of delay, and replanning value.
+
+<!-- RUNTIME_EXTERNAL_CONVERGENCE_SIGNAL_2026_07_02_PROVENANCE -->
+
+## 2026-07-02 — External Runtime Convergence Signal
+
+Recorded runtime convergence signal:
+
+- root log: `PHI_OMEGA_RUNTIME_AUDIT_LOG_1.md`
+- detailed note: `docs/RUNTIME_EXTERNAL_CONVERGENCE_SIGNAL_2026_07_02.md`
+- regression test: `tests/test_runtime_external_convergence_signal.py`
+
+Scope:
+
+- records external convergence signal only;
+- records no adoption claim;
+- records no endorsement claim;
+- records no partnership claim;
+- records no certification claim;
+- records no official integration claim.
+
+Invariant preserved:
+
+~~~text
+Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)
+~~~
+
+Operational sentence:
+
+~~~text
+No runtime may claim a transition is valid unless it can prove that the released transition is still the supported transition at execution time.
+~~~
