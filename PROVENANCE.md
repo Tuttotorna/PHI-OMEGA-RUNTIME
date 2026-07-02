@@ -247,3 +247,25 @@ Scope:
 Refined reading:
 
 Valid(τ) ⇔ Required(τ) ⊆ Fresh(FragmentLevelSupported(τ))
+
+<!-- V022_DOI_README_PROVENANCE_2026_07_02_PROVENANCE -->
+
+## 2026-07-02 — v0.2.2 DOI
+
+Recorded DOI for PHI-OMEGA-RUNTIME v0.2.2.
+
+Release:
+
+- tag: `v0.2.2`
+- title: `v0.2.2 — Support Freshness / Fragment-Level Support Refinement`
+- DOI: `https://doi.org/10.5281/zenodo.21130843`
+
+Scope:
+
+- records DOI metadata for v0.2.2;
+- does not move or recreate the release tag;
+- does not claim external adoption, endorsement, partnership, certification, official integration, or production use by any external project.
+
+Refined reading preserved:
+
+Valid(τ) ⇔ Required(τ) ⊆ Fresh(FragmentLevelSupported(τ))

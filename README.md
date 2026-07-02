@@ -287,3 +287,23 @@ See:
 
 - docs/SUPPORT_FRESHNESS_FRAGMENT_REFINEMENT.md
 - data/transition_sufficiency_conformance_cases.json
+
+<!-- V022_DOI_README_PROVENANCE_2026_07_02_README -->
+
+## v0.2.2 DOI
+
+PHI-OMEGA-RUNTIME v0.2.2 — Support Freshness / Fragment-Level Support Refinement
+
+DOI: [https://doi.org/10.5281/zenodo.21130843](https://doi.org/10.5281/zenodo.21130843)
+
+Release: https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME/releases/tag/v0.2.2
+
+This DOI identifies the v0.2.2 release archive for the Support Freshness / Fragment-Level Support Refinement.
+
+The release refines the Transition Sufficiency Conformance Contract with:
+
+- support freshness;
+- fragment-level support;
+- operational root fragment traceback;
+- forward transition reconstruction;
+- past-error-to-future-constraint conversion.
