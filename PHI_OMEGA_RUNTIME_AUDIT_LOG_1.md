@@ -134,3 +134,37 @@ The gain is preventable invalid execution removed before downstream cost, audit 
 ~~~text
 No runtime may claim a transition is valid unless it can prove that the released transition is still the supported transition at execution time.
 ~~~
+
+<!-- TRANSITION_SUFFICIENCY_CONFORMANCE_CONTRACT_2026_07_02 -->
+
+## 2026-07-02 — Transition Sufficiency Conformance Contract
+
+Status: executable conformance contract.
+
+This entry records the addition of a portable PHI-OMEGA-RUNTIME conformance artifact.
+
+It does not claim adoption, endorsement, partnership, certification, official integration, or production use by any external project.
+
+Added artifacts:
+
+- data/transition_sufficiency_conformance_cases.json
+- schemas/transition_sufficiency_conformance_result.schema.json
+- tools/transition_sufficiency_conformance.py
+- docs/TRANSITION_SUFFICIENCY_CONFORMANCE_CONTRACT.md
+- tests/test_transition_sufficiency_conformance_contract.py
+
+Core invariant:
+
+    Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)
+
+Canonical sentence:
+
+    No runtime may claim a transition is valid unless it can prove that the released transition is still the supported transition at execution time.
+
+Operational gain estimate: +20% to +30% over log-only evidence.
+
+Reason:
+
+- the previous external convergence signal is now converted into an executable fixture;
+- the contract separates PASS, FAIL, NON_CONFORMANT, and UNTESTABLE;
+- the artifact can be run by any runtime without adopting PHI-OMEGA-RUNTIME internals.

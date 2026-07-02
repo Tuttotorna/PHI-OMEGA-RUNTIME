@@ -232,3 +232,22 @@ Core formula:
 A transition may proceed only when the authority, boundary, context, evidence, policy, time window, verifier depth, recovery path and gain required by the transition are supported at execution time.
 
 Gain can justify checking a transition. Gain cannot authorize an invalid transition.
+
+<!-- TRANSITION_SUFFICIENCY_CONFORMANCE_CONTRACT_2026_07_02_README -->
+
+## Transition Sufficiency Conformance Contract
+
+PHI-OMEGA-RUNTIME includes a portable conformance contract for testing whether a runtime can prove that a released transition remains supported at execution time.
+
+Core invariant:
+
+    Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)
+
+Artifacts:
+
+- data/transition_sufficiency_conformance_cases.json
+- schemas/transition_sufficiency_conformance_result.schema.json
+- tools/transition_sufficiency_conformance.py
+- docs/TRANSITION_SUFFICIENCY_CONFORMANCE_CONTRACT.md
+
+This is not an external adoption claim.

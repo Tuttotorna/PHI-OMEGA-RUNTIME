@@ -168,3 +168,30 @@ Operational sentence:
 ~~~text
 No runtime may claim a transition is valid unless it can prove that the released transition is still the supported transition at execution time.
 ~~~
+
+<!-- TRANSITION_SUFFICIENCY_CONFORMANCE_CONTRACT_2026_07_02_PROVENANCE -->
+
+## 2026-07-02 — Transition Sufficiency Conformance Contract
+
+Added executable PHI-OMEGA-RUNTIME conformance contract.
+
+Artifacts:
+
+- data/transition_sufficiency_conformance_cases.json
+- schemas/transition_sufficiency_conformance_result.schema.json
+- tools/transition_sufficiency_conformance.py
+- docs/TRANSITION_SUFFICIENCY_CONFORMANCE_CONTRACT.md
+- tests/test_transition_sufficiency_conformance_contract.py
+
+Scope:
+
+- records internal PHI-OMEGA-RUNTIME conformance artifact;
+- records no external adoption claim;
+- records no endorsement claim;
+- records no partnership claim;
+- records no certification claim;
+- records no official integration claim.
+
+Invariant preserved:
+
+    Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)

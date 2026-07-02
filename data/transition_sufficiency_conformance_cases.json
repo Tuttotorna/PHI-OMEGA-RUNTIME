@@ -1,0 +1,233 @@
+{
+  "fixture_version": "tsc-0.1.0",
+  "name": "Transition Sufficiency Conformance Contract",
+  "core_invariant": "Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)",
+  "canonical_sentence": "No runtime may claim a transition is valid unless it can prove that the released transition is still the supported transition at execution time.",
+  "result_contract": [
+    "PASS",
+    "FAIL",
+    "NON_CONFORMANT",
+    "UNTESTABLE"
+  ],
+  "decision_contract": [
+    "ALLOW",
+    "REPAIR",
+    "SOFT_BLOCK",
+    "HARD_BLOCK",
+    "HARD_BLOCK_OR_REVALIDATE",
+    "HARD_BLOCK_OR_REPAIR",
+    "HARD_BLOCK_OR_RECONCILE",
+    "NON_CONFORMANT",
+    "UNTESTABLE"
+  ],
+  "cases": [
+    {
+      "case_id": "TSC-001",
+      "name": "authorized args hash differs from execution args hash",
+      "failure_class": "authorization_execution_mismatch",
+      "description": "A transition was authorized for one canonical argument hash but execution attempts to release another.",
+      "required_support": [
+        "authorization_decision_ref",
+        "approval_args_hash",
+        "execution_args_hash",
+        "hash_equality_check",
+        "fail_closed_on_mismatch"
+      ],
+      "stimulus": {
+        "approval_args_hash": "A",
+        "execution_args_hash": "B"
+      },
+      "expected_decisions": [
+        "HARD_BLOCK"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-002",
+      "name": "context drift before irreversible execution",
+      "failure_class": "context_drift_irreversible_transition",
+      "description": "The same tool and args are present, but the supporting context changed before an irreversible transition.",
+      "required_support": [
+        "authorization_context_hash",
+        "execution_context_hash",
+        "side_effect_class",
+        "context_revalidation"
+      ],
+      "stimulus": {
+        "same_tool": true,
+        "same_args_hash": true,
+        "context_hash_changed": true,
+        "side_effect_class": "irreversible"
+      },
+      "expected_decisions": [
+        "HARD_BLOCK_OR_REVALIDATE",
+        "HARD_BLOCK"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-003",
+      "name": "allow decision without reconstructable support basis",
+      "failure_class": "support_basis_missing",
+      "description": "The runtime claims ALLOW but cannot reconstruct the basis that supported the decision.",
+      "required_support": [
+        "decision",
+        "support_basis",
+        "evidence_refs",
+        "decision_ref"
+      ],
+      "stimulus": {
+        "decision": "ALLOW",
+        "support_basis_missing": true
+      },
+      "expected_decisions": [
+        "NON_CONFORMANT"
+      ],
+      "expected_result_if_supported": "NON_CONFORMANT"
+    },
+    {
+      "case_id": "TSC-004",
+      "name": "execution receipt exists but terminal outcome is missing",
+      "failure_class": "terminal_outcome_missing",
+      "description": "The runtime logs execution but cannot prove the terminal outcome of the released transition.",
+      "required_support": [
+        "execution_receipt",
+        "terminal_outcome_ref",
+        "terminal_outcome_status"
+      ],
+      "stimulus": {
+        "execution_receipt_present": true,
+        "terminal_outcome_missing": true
+      },
+      "expected_decisions": [
+        "NON_CONFORMANT"
+      ],
+      "expected_result_if_supported": "NON_CONFORMANT"
+    },
+    {
+      "case_id": "TSC-005",
+      "name": "runtime support withdrawn after static policy allowed",
+      "failure_class": "support_withdrawn_before_execution",
+      "description": "Static policy allows the action, but runtime state withdraws support before execution.",
+      "required_support": [
+        "policy_version",
+        "runtime_support_state",
+        "execution_time_recompute",
+        "fail_closed_or_repair"
+      ],
+      "stimulus": {
+        "static_policy_allows": true,
+        "runtime_context_withdraws_support": true
+      },
+      "expected_decisions": [
+        "HARD_BLOCK_OR_REPAIR",
+        "HARD_BLOCK",
+        "REPAIR"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-006",
+      "name": "declared governance dimension is not decision-bound",
+      "failure_class": "declared_but_not_bound_dimension",
+      "description": "A governance field is disclosed but changing it does not affect decision_ref, hash, conformance result, or terminal outcome.",
+      "required_support": [
+        "declared_dimension",
+        "decision_preimage_binding",
+        "decision_effect_test"
+      ],
+      "stimulus": {
+        "declared_dimension": "source_class",
+        "declared_dimension_not_bound": true
+      },
+      "expected_decisions": [
+        "NON_CONFORMANT"
+      ],
+      "expected_result_if_supported": "NON_CONFORMANT"
+    },
+    {
+      "case_id": "TSC-007",
+      "name": "checkpoint replay duplicates side effect with unknown terminal state",
+      "failure_class": "unsafe_replay_without_terminal_reconciliation",
+      "description": "A checkpointed runtime attempts redispatch before proving the previous side-effecting transition is terminal or safely recoverable.",
+      "required_support": [
+        "transition_key",
+        "side_effect_class",
+        "prior_transition_state",
+        "terminal_outcome_ref",
+        "reconciliation_path"
+      ],
+      "stimulus": {
+        "prior_transition_state": "TERMINAL_OUTCOME_UNKNOWN",
+        "side_effect_class": "payment_write_email_or_subagent",
+        "redispatch_requested": true
+      },
+      "expected_decisions": [
+        "HARD_BLOCK_OR_RECONCILE",
+        "HARD_BLOCK",
+        "SOFT_BLOCK"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-008",
+      "name": "delegated authority call missing actor",
+      "failure_class": "delegated_authority_actor_missing",
+      "description": "A delegated transition consumes authority but does not identify the actor or delegated principal whose authority is being consumed.",
+      "required_support": [
+        "agent_id",
+        "actor",
+        "actor_mode",
+        "delegation_chain",
+        "authority_profile"
+      ],
+      "stimulus": {
+        "agent_id": "agent-1",
+        "actor_missing": true,
+        "delegated_authority_consumed": true
+      },
+      "expected_decisions": [
+        "HARD_BLOCK"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-009",
+      "name": "policy or authority expired before execution",
+      "failure_class": "stale_policy_or_authority",
+      "description": "The authorization was valid earlier, but policy or authority is no longer valid at execution time.",
+      "required_support": [
+        "policy_snapshot",
+        "authority_profile",
+        "validity_window",
+        "execution_time_recompute"
+      ],
+      "stimulus": {
+        "policy_or_authority_expired_before_execution": true
+      },
+      "expected_decisions": [
+        "HARD_BLOCK"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-010",
+      "name": "runtime exposes insufficient observable state",
+      "failure_class": "unobservable_transition_state",
+      "description": "The runtime cannot expose enough state to honestly evaluate the conformance case.",
+      "required_support": [
+        "observable_state",
+        "decision",
+        "support_basis",
+        "terminal_outcome_ref"
+      ],
+      "stimulus": {
+        "observable_state": false
+      },
+      "expected_decisions": [
+        "UNTESTABLE"
+      ],
+      "expected_result_if_supported": "UNTESTABLE"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Tuttotorna/PHI-OMEGA-RUNTIME/schemas/transition_sufficiency_conformance_result.schema.json",
+  "title": "Transition Sufficiency Conformance Result",
+  "type": "object",
+  "required": [
+    "runtime",
+    "implementation_version",
+    "fixture_version",
+    "case_id",
+    "observed_support",
+    "decision",
+    "expected_decision",
+    "result",
+    "evidence_refs",
+    "terminal_outcome_ref"
+  ],
+  "properties": {
+    "runtime": {
+      "type": "string"
+    },
+    "implementation_version": {
+      "type": "string"
+    },
+    "fixture_version": {
+      "type": "string"
+    },
+    "case_id": {
+      "type": "string"
+    },
+    "observed_support": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "decision": {
+      "type": "string"
+    },
+    "expected_decision": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "NON_CONFORMANT",
+        "UNTESTABLE"
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "terminal_outcome_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
