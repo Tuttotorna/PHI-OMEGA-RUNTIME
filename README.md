@@ -264,3 +264,26 @@ Artifacts:
 - docs/TRANSITION_SUFFICIENCY_CONFORMANCE_CONTRACT.md
 
 This is not an external adoption claim.
+
+<!-- SUPPORT_FRESHNESS_FRAGMENT_REFINEMENT_2026_07_02_README -->
+
+## Support Freshness / Fragment-Level Support Refinement
+
+PHI-OMEGA-RUNTIME refines transition sufficiency with support freshness and fragment-level support.
+
+Base invariant:
+
+Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)
+
+Refined reading:
+
+Valid(τ) ⇔ Required(τ) ⊆ Fresh(FragmentLevelSupported(τ))
+
+A support object is not sufficient merely because it exists globally.
+
+The support fragments required by the transition must be current, valid, observable, non-revoked, non-superseded, and deep enough for the transition risk.
+
+See:
+
+- docs/SUPPORT_FRESHNESS_FRAGMENT_REFINEMENT.md
+- data/transition_sufficiency_conformance_cases.json

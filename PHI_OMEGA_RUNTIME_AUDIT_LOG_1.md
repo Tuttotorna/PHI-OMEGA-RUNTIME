@@ -168,3 +168,47 @@ Reason:
 - the previous external convergence signal is now converted into an executable fixture;
 - the contract separates PASS, FAIL, NON_CONFORMANT, and UNTESTABLE;
 - the artifact can be run by any runtime without adopting PHI-OMEGA-RUNTIME internals.
+
+<!-- SUPPORT_FRESHNESS_FRAGMENT_REFINEMENT_2026_07_02 -->
+
+## 2026-07-02 — Support Freshness / Fragment-Level Support Refinement
+
+Status: contract refinement.
+
+This entry records a refinement of the Transition Sufficiency Conformance Contract after public falsification-gate analysis.
+
+The base invariant is preserved:
+
+Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)
+
+The refined reading is:
+
+Valid(τ) ⇔ Required(τ) ⊆ Fresh(FragmentLevelSupported(τ))
+
+Refinement classes added:
+
+- stale_evidence_under_intact_schema
+- object_level_support_not_fragment_valid
+- operational_root_fragment_missing
+- forward_transition_reconstruction_failure
+- past_error_not_converted_to_future_constraint
+
+Operational correction:
+
+A support object is not sufficient merely because it exists globally.
+
+The support fragments required by the transition must be current, valid, observable, non-revoked, non-superseded, and deep enough for the transition risk.
+
+Anti-infinite-regress rule:
+
+Trace backward only through decision-relevant fragments until the operational root fragment is found.
+
+Then reconstruct forward to terminal or reconciled state.
+
+Past-error conversion rule:
+
+A past failure becomes future support only if converted into a constraint, negative vector, fixture, revalidation rule, fail-closed behavior, or verifier-depth requirement.
+
+Scope:
+
+This entry records no external adoption, endorsement, partnership, certification, official integration, or production use by any external project.

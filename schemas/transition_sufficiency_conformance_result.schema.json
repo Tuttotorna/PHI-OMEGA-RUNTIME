@@ -71,6 +71,42 @@
     },
     "notes": {
       "type": "string"
+    },
+    "support_freshness": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "fragment_trace": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "operational_root_fragment": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "forward_reconstruction": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "converted_error_constraints": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
     }
   },
   "additionalProperties": true

@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 
-FIXTURE_VERSION = "tsc-0.1.0"
+FIXTURE_VERSION = "tsc-0.2.0"
 VALID_RESULTS = {"PASS", "FAIL", "NON_CONFORMANT", "UNTESTABLE"}
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,6 +64,12 @@ def classify_observation(
         "binding_path_missing",
         "declared_dimension_not_bound",
         "decision_ref_missing",
+        "freshness_proof_missing",
+        "validity_depth_missing",
+        "fragment_trace_missing",
+        "operational_root_fragment_missing",
+        "required_fragment_unobservable",
+        "converted_future_constraint_missing_when_claiming_allow",
     ]
 
     if any(bool(observed_support.get(flag)) or bool(observation.get(flag)) for flag in non_conformant_flags):

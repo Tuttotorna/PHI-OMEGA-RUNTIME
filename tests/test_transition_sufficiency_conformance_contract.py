@@ -21,7 +21,7 @@ def load_tool_module():
 def test_conformance_fixture_exists_and_has_unique_cases():
     data = json.loads(CASES_PATH.read_text(encoding="utf-8"))
 
-    assert data["fixture_version"] == "tsc-0.1.0"
+    assert data["fixture_version"] == "tsc-0.2.0"
     assert data["core_invariant"] == "Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)"
     assert "PASS" in data["result_contract"]
     assert "FAIL" in data["result_contract"]

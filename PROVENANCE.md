@@ -216,3 +216,34 @@ Scope:
 - records no partnership claim;
 - records no certification claim;
 - records no official integration claim.
+
+<!-- SUPPORT_FRESHNESS_FRAGMENT_REFINEMENT_2026_07_02_PROVENANCE -->
+
+## 2026-07-02 — Support Freshness / Fragment-Level Support Refinement
+
+Added support-freshness and fragment-level support refinement to PHI-OMEGA-RUNTIME.
+
+Artifacts updated or added:
+
+- data/transition_sufficiency_conformance_cases.json
+- schemas/transition_sufficiency_conformance_result.schema.json
+- tools/transition_sufficiency_conformance.py
+- docs/SUPPORT_FRESHNESS_FRAGMENT_REFINEMENT.md
+- docs/TRANSITION_SUFFICIENCY_CONFORMANCE_CONTRACT.md
+- tests/test_support_freshness_fragment_refinement.py
+- PHI_OMEGA_RUNTIME_AUDIT_LOG_1.md
+- README.md
+- PROVENANCE_MANIFEST.sha256
+
+Scope:
+
+- records internal contract refinement;
+- records no external adoption claim;
+- records no endorsement claim;
+- records no partnership claim;
+- records no certification claim;
+- records no official integration claim.
+
+Refined reading:
+
+Valid(τ) ⇔ Required(τ) ⊆ Fresh(FragmentLevelSupported(τ))

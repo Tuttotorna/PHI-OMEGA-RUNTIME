@@ -1,5 +1,5 @@
 {
-  "fixture_version": "tsc-0.1.0",
+  "fixture_version": "tsc-0.2.0",
   "name": "Transition Sufficiency Conformance Contract",
   "core_invariant": "Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)",
   "canonical_sentence": "No runtime may claim a transition is valid unless it can prove that the released transition is still the supported transition at execution time.",
@@ -18,7 +18,11 @@
     "HARD_BLOCK_OR_REPAIR",
     "HARD_BLOCK_OR_RECONCILE",
     "NON_CONFORMANT",
-    "UNTESTABLE"
+    "UNTESTABLE",
+    "REVALIDATE",
+    "REPAIR_OR_REVALIDATE",
+    "RECONCILE",
+    "FAIL_CLOSED"
   ],
   "cases": [
     {
@@ -228,6 +232,130 @@
         "UNTESTABLE"
       ],
       "expected_result_if_supported": "UNTESTABLE"
+    },
+    {
+      "case_id": "TSC-011",
+      "name": "stale evidence under intact schema",
+      "failure_class": "stale_evidence_under_intact_schema",
+      "description": "The schema and support references are present, but the referenced evidence is stale, superseded, revoked, or no longer valid at release time.",
+      "required_support": [
+        "support_reference",
+        "evidence_freshness",
+        "supersession_check",
+        "revocation_check",
+        "release_time_validity",
+        "verifier_depth"
+      ],
+      "stimulus": {
+        "schema_intact": true,
+        "support_reference_present": true,
+        "evidence_stale": true
+      },
+      "expected_decisions": [
+        "REPAIR_OR_REVALIDATE",
+        "REPAIR",
+        "REVALIDATE",
+        "HARD_BLOCK"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-012",
+      "name": "object-level support exists but required support fragment is invalid",
+      "failure_class": "object_level_support_not_fragment_valid",
+      "description": "A support object exists globally, but the specific internal fragment required by the transition is stale, revoked, superseded, missing, or not decision-relevant anymore.",
+      "required_support": [
+        "support_object",
+        "required_support_fragment",
+        "fragment_validity",
+        "fragment_currentness",
+        "fragment_decision_binding"
+      ],
+      "stimulus": {
+        "support_object_present": true,
+        "required_fragment_invalid": true
+      },
+      "expected_decisions": [
+        "HARD_BLOCK",
+        "REPAIR",
+        "REPAIR_OR_REVALIDATE"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-013",
+      "name": "missing operational root fragment traceback",
+      "failure_class": "operational_root_fragment_missing",
+      "description": "The runtime claims a transition is supported but cannot trace the support chain backward to the decision-relevant operational root fragment.",
+      "required_support": [
+        "support_chain",
+        "decision_relevant_fragments",
+        "operational_root_fragment",
+        "traceback_evidence"
+      ],
+      "stimulus": {
+        "support_chain_present": true,
+        "operational_root_fragment_missing": true
+      },
+      "expected_decisions": [
+        "NON_CONFORMANT"
+      ],
+      "expected_result_if_supported": "NON_CONFORMANT"
+    },
+    {
+      "case_id": "TSC-014",
+      "name": "forward reconstruction fails after operational root fragment",
+      "failure_class": "forward_transition_reconstruction_failure",
+      "description": "The operational root fragment is known, but the runtime cannot reconstruct the support chain forward to a terminal or reconciled state without a break.",
+      "required_support": [
+        "operational_root_fragment",
+        "forward_support_chain",
+        "terminal_or_reconciled_state",
+        "break_detection"
+      ],
+      "stimulus": {
+        "operational_root_fragment_present": true,
+        "forward_reconstruction_break": true
+      },
+      "expected_decisions": [
+        "REPAIR",
+        "RECONCILE",
+        "HARD_BLOCK"
+      ],
+      "expected_result_if_supported": "PASS"
+    },
+    {
+      "case_id": "TSC-015",
+      "name": "past failure not converted into future constraint",
+      "failure_class": "past_error_not_converted_to_future_constraint",
+      "description": "A known previous failure class exists, but the runtime does not convert it into a future constraint, negative vector, fixture, revalidation rule, or fail-closed condition.",
+      "required_support": [
+        "known_failure_class",
+        "converted_future_constraint",
+        "negative_vector",
+        "revalidation_rule",
+        "repeat_failure_prevention"
+      ],
+      "stimulus": {
+        "known_failure_class_present": true,
+        "converted_future_constraint_missing": true,
+        "same_failure_repeated": true
+      },
+      "expected_decisions": [
+        "REPAIR",
+        "HARD_BLOCK",
+        "NON_CONFORMANT"
+      ],
+      "expected_result_if_supported": "PASS"
     }
-  ]
+  ],
+  "support_predicate_refinement": {
+    "name": "Support Freshness / Fragment-Level Support Refinement",
+    "base_invariant": "Valid(τ) ⇔ Required(τ) ⊆ Supported(τ)",
+    "refined_reading": "Valid(τ) ⇔ Required(τ) ⊆ Fresh(FragmentLevelSupported(τ))",
+    "reason": "A support object is not sufficient merely because a reference exists. Support must be current, valid, non-revoked, non-superseded, observable at the required verifier depth, and valid at the fragment level required by the transition.",
+    "anti_infinite_regress_rule": "Trace backward only through decision-relevant fragments until the operational root fragment is found. Do not decompose fragments that cannot change the decision, terminal outcome, recovery path, risk class, or verifier-depth requirement.",
+    "forward_reconstruction_rule": "After the operational root fragment is found, reconstruct the transition forward through the required support chain to terminal or reconciled state.",
+    "past_error_conversion_rule": "A past failure becomes useful support only if it is converted into a future constraint, fixture, negative vector, revalidation rule, or fail-closed condition."
+  }
 }

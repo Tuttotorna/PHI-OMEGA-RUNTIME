@@ -100,3 +100,27 @@ It records no partnership.
 It records no certification.
 
 It records no official integration.
+
+<!-- SUPPORT_FRESHNESS_FRAGMENT_REFINEMENT_2026_07_02_DOC_APPEND -->
+
+## Support freshness and fragment-level refinement
+
+The contract now uses a stricter reading of support:
+
+Valid(τ) ⇔ Required(τ) ⊆ Fresh(FragmentLevelSupported(τ))
+
+This does not replace the base invariant.
+
+It clarifies that a support reference is insufficient when the referenced support is stale, revoked, superseded, unobservable, too shallow, or invalid at the specific fragment level required by the transition.
+
+A conformant runtime should not pass a transition merely because a global support object exists.
+
+It must prove that the required support fragments are current, valid, observable, and decision-relevant at execution time.
+
+The runtime should trace backward to the operational root fragment that supports or breaks the transition, then reconstruct the transition forward to terminal or reconciled state.
+
+The trace does not continue indefinitely.
+
+It stops at the first decision-relevant fragment whose validity changes the decision, terminal outcome, recovery path, risk class, or verifier-depth requirement.
+
+Past errors become useful only when converted into future constraints, negative vectors, fixtures, revalidation rules, or fail-closed behavior.
